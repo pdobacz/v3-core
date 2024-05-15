@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BUSL-1.1
-pragma solidity =0.7.6;
+pragma solidity >=0.7.6;
 
 import './interfaces/IUniswapV3Pool.sol';
 
@@ -474,7 +474,7 @@ contract UniswapV3Pool is IUniswapV3Pool, NoDelegateCall {
                 owner: recipient,
                 tickLower: tickLower,
                 tickUpper: tickUpper,
-                liquidityDelta: int256(amount).toInt128()
+                liquidityDelta: int256(int128(amount)).toInt128()
             })
         );
 
@@ -530,7 +530,7 @@ contract UniswapV3Pool is IUniswapV3Pool, NoDelegateCall {
                 owner: msg.sender,
                 tickLower: tickLower,
                 tickUpper: tickUpper,
-                liquidityDelta: -int256(amount).toInt128()
+                liquidityDelta: -int256(int128(amount)).toInt128()
             })
         );
 

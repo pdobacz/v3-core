@@ -3,6 +3,52 @@ import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-etherscan'
 
+// hardhat.config.js
+import { HardhatUserConfig, subtask } from "hardhat/config";
+
+const {
+  TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD,
+} = require("hardhat/builtin-tasks/task-names");
+const path = require("path");
+
+subtask(
+    TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD,
+    async (
+        args: {
+          solcVersion: string;
+        },
+        hre,
+        runSuper
+    ) => {
+      if (args.solcVersion === "0.8.18") {
+        const compilerPath = path.join(
+            // "/Users/rodia/projects/solidity/cmake-build-debug/solc",
+            "/Users/rodia/projects/solidity/build/solc/",
+            "solc"
+        );
+
+        return {
+          compilerPath,
+          isSolcJs: false, // if you are using a native compiler, set this to false
+          version: args.solcVersion,
+          // This is used as extra information in the build-info files,
+          // but other than that is not important
+          longVersion: "solc",
+        };
+      }
+
+      // since we only want to override the compiler for version 0.8.24,
+      // the runSuper function allows us to call the default subtask.
+      return runSuper();
+    }
+);
+
+// const config: HardhatUserConfig = {
+//   solidity: "0.8.24",
+// };
+
+// export default config;
+
 export default {
   networks: {
     hardhat: {
@@ -48,12 +94,15 @@ export default {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
   solidity: {
-    version: '0.7.6',
+    version: '0.8.18',
     settings: {
       optimizer: {
         enabled: true,
-        runs: 800,
+        runs: 1,
       },
+      evmVersion: "shanghai",
+      viaIR: true,
+      eofVersion: 1,
       metadata: {
         // do not include the metadata hash, since this is machine dependent
         // and we want all generated code to be deterministic
