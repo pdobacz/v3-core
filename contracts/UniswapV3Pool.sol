@@ -39,19 +39,19 @@ contract UniswapV3Pool is IUniswapV3Pool, NoDelegateCall {
     using Oracle for Oracle.Observation[65535];
 
     /// @inheritdoc IUniswapV3PoolImmutables
-    address public immutable override factory;
+    address public  override factory;
     /// @inheritdoc IUniswapV3PoolImmutables
-    address public immutable override token0;
+    address public  override token0;
     /// @inheritdoc IUniswapV3PoolImmutables
-    address public immutable override token1;
+    address public  override token1;
     /// @inheritdoc IUniswapV3PoolImmutables
-    uint24 public immutable override fee;
+    uint24 public  override fee;
 
     /// @inheritdoc IUniswapV3PoolImmutables
-    int24 public immutable override tickSpacing;
+    int24 public  override tickSpacing;
 
     /// @inheritdoc IUniswapV3PoolImmutables
-    uint128 public immutable override maxLiquidityPerTick;
+    uint128 public  override maxLiquidityPerTick;
 
     struct Slot0 {
         // the current price
