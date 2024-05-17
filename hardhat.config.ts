@@ -20,10 +20,9 @@ subtask(
         hre,
         runSuper
     ) => {
-      if (args.solcVersion === "0.8.18") {
+      if (args.solcVersion === "0.8.26") {
         const compilerPath = path.join(
-            // "/Users/rodia/projects/solidity/cmake-build-debug/solc",
-            "/Users/rodia/projects/solidity/build/solc/",
+            "/home/user/sources/ethereum/solidity/build/solc/",
             "solc"
         );
 
@@ -87,6 +86,10 @@ export default {
     polygon: {
       url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
     },
+    besuWallet: {
+      url: "http://localhost:8545",
+      accounts: ["8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63", "c87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3", "ae6ae8e5ccbfb04590405997ee2d52d2b330726137b875053c36d94e974d162f"]
+    },
   },
   etherscan: {
     // Your API key for Etherscan
@@ -94,13 +97,13 @@ export default {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
   solidity: {
-    version: '0.8.18',
+    version: '0.8.26',
     settings: {
       optimizer: {
         enabled: true,
-        runs: 1,
+        runs: 200,
       },
-      evmVersion: "shanghai",
+      evmVersion: "cancun",
       viaIR: true,
       eofVersion: 1,
       metadata: {
